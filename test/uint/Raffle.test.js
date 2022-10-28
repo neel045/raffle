@@ -1,4 +1,4 @@
-const { assert, expect, AssertionError } = require("chai")
+const { assert, expect } = require("chai")
 const { network, getNamedAccounts, deployments, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("./../../helper-hardhat-config")
 
@@ -21,7 +21,7 @@ const { developmentChains, networkConfig } = require("./../../helper-hardhat-con
               it("Initialize Raffle Correctly", async () => {
                   const raffleState = await raffle.getRaffleState()
                   assert.equal(raffleState.toString(), "0")
-                  assert.equal(interval.toString(), networkConfig[chainId]["interval"])
+                  assert.equal(interval.toString(), networkConfig[chainId]["keepersUpdateInterval"])
               })
           })
 
@@ -164,7 +164,6 @@ const { developmentChains, networkConfig } = require("./../../helper-hardhat-con
 
                   await new Promise(async (resolve, reject) => {
                       raffle.once("WinnerPicked", async () => {
-                          console.log("Found Winner")
                           try {
                               const recentWinner = await raffle.getRecentWinner()
                               const raffleState = await raffle.getRaffleState()

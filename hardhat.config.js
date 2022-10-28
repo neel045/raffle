@@ -25,6 +25,9 @@ module.exports = {
             chainId: 5,
             blockConfirmation: 6,
         },
+        localhost: {
+            chainId: 31337,
+        },
     },
 
     etherscan: {
